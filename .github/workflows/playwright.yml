@@ -35,8 +35,7 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-
-      # Cho phép bước này thất bại nhưng workflow vẫn tiếp tục
+        
       - name: Run Playwright Tests
         run: npm test
         continue-on-error: true
