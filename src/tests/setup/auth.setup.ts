@@ -1,7 +1,7 @@
 import { expect, test } from '../../fixtures/PagesFixture';
 import { ENV } from '../../config/env';
 
-test('C498 Should login and save authenticated session',
+test('C110 Should login and save authenticated session',
     {
         tag: ['@auth', '@smoke']
     },  
