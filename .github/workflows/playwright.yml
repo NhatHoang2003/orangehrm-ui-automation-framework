@@ -8,23 +8,17 @@ on:
     branches:
       - main
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 permissions:
   contents: write
 
 jobs:
   test:
-    name: Run Playwright Tests
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
     env:
       ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
       ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-      BASE_URL: ${{ secrets.BASE_URL }}
 
     steps:
       - name: Checkout repository
@@ -34,31 +28,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
-
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+        run: npm install
 
       - name: Install Playwright Browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps
-
-      - name: Install OS dependencies only (cache hit)
-        if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: npx playwright install-deps
 
       - name: Run Playwright Tests
         run: npm test
-        continue-on-error: true
 
-      - name: Upload Playwright Report
+      - name: Upload Playwright Report (Artifact)
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -67,16 +47,15 @@ jobs:
           retention-days: 30
 
   deploy-report:
-    name: Deploy Playwright Report
+    if: github.ref == 'refs/heads/main'
     needs: test
-    if: always() && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download Playwright Report
+      - name: Download Playwright Report Artifact
         uses: actions/download-artifact@v4
         with:
           name: playwright-report

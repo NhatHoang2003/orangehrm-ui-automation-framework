@@ -3,5 +3,5 @@ export const ENV = {
 
     ADMIN_PASSWORD: process.env.ADMIN_PASSWORD!,
 
-    BASE_URL: process.env.APP_URL!
+    BASE_URL: process.env.BASE_URL!
 }

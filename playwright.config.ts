@@ -46,7 +46,7 @@ export default defineConfig({
   
       
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: process.env.APP_URL,
+    baseURL: process.env.BASE_URL,
     
     // Stabilities
     actionTimeout: Number(process.env.APP_TIMEOUT_ACTION) || 15000,
