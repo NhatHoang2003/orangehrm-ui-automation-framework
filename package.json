@@ -1,0 +1,72 @@
+{
+  "name": "orangehrm_admin_management_framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:list": "playwright test --list",
+    "test:cr": "playwright test --project=chromium",
+    "test:ff": "playwright test --project=firefox",
+    "test:wk": "playwright test --project=webkit",
+    "test:cr:hd": "npm run test:cr -- --headed",
+    "test:ff:hd": "npm run test:ff -- --headed",
+    "test:wk:hd": "npm run test:wk -- --headed",
+    "test:auth": "playwright test tests/setup/auth.setup.ts",
+
+    "// RUN BY TEST TYPE (SMOKE / REGRESSION)": "",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:reg": "playwright test --grep @regression",
+
+    "// RUN BY INDIVIDUAL FIXTURE / MODULE": "",
+    "test:login:smoke": "playwright test ui/login --grep @smoke",
+    "test:login:reg": "playwright test ui/login --grep @regression",
+    "test:dashboard:smoke": "playwright test ui/dashboard --grep @smoke",
+    "test:dashboard:reg": "playwright test ui/dashboard --grep @regression",
+    "test:admin:smoke": "playwright test ui/admin --grep @smoke",
+    "test:admin:reg": "playwright test ui/admin --grep @regression",
+
+    "// RUN IN HEADED MODE (UI DISPLAYED)": "",
+    "test:smoke:hd": "npm run test:smoke -- --headed",
+    "test:reg:hd": "npm run test:reg -- --headed",
+    "test:login:smoke:hd": "npm run test:login:smoke -- --headed",
+    "test:login:reg:hd": "npm run test:login:reg -- --headed",
+    "test:dashboard:smoke:hd": "npm run test:dashboard:smoke -- --headed",
+    "test:admin:smoke:hd": "npm run test:admin:smoke -- --headed",
+    "test:admin:reg:hd": "npm run test:admin:reg -- --headed",
+
+    "// TEST REPORT COMMANDS": "",
+    "report": "playwright show-report",
+    "report:clean": "rimraf allure-results allure-report",
+    "report:generate": "allure generate allure-results --clean -o allure-report",
+    "report:open": "allure open allure-report",
+    "report:serve": "allure serve allure-results",
+    "test:allure": "npm run report:clean && npm run test && npm run report:generate",
+    "//": "------- E2E flow -------"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NhatHoang2003/OrangeHRM_Admin_Management_Framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NhatHoang2003/OrangeHRM_Admin_Management_Framework/issues"
+  },
+  "homepage": "https://github.com/NhatHoang2003/OrangeHRM_Admin_Management_Framework#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.8.0",
+    "allure-commandline": "^2.41.0",
+    "allure-playwright": "^3.8.0",
+    "dotenv": "^17.4.2",
+    "rimraf": "^6.1.3"
+  },
+  "dependencies": {
+    "axios": "^1.17.0"
+  }
+}

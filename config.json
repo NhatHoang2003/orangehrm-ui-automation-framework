@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "commonjs",
+        "moduleResolution": "node10",
+        "lib": [
+            "es2020"
+        ],
+        "types": [
+            "node"
+        ],
+        "sourceMap": true,
+        "strict": true,
+        "esModuleInterop": true,
+        "moduleDetection": "force",
+        "skipLibCheck": true,
+        "resolvePackageJsonExports": false,
+        "resolvePackageJsonImports": false,
+        "resolveJsonModule": false,
+        "useDefineForClassFields": false
+    },
+    "files": [
+        "./playwright.config.ts",
+        "./src/tests/ui/example.spec.ts"
+    ]
+}
